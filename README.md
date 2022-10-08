@@ -4,7 +4,7 @@
 # Instruction
 Pour chaque problème, écrivez un programme en Javascript qui sera contenu dans un fichier (avec l'extension .js).
 
-Écrivez les programmes demandée et ajoutez quelques tests d'exécution (3-4) pour démontrer la fonctionnalité de votre programme.
+Écrivez les programmes demandées et ajoutez quelques tests d'exécution (3-4) pour démontrer la fonctionnalité de votre programme.
 
 Pour tester votre code, vous pouvez l'invoquer avec node.
 
