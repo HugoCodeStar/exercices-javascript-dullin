@@ -4,21 +4,21 @@
 # Instruction
 Pour chaque problème, écrivez un programme en javascript qui sera contenu dans un fichier (avec l'extension .js).
 
-Écrivez les programmes demandez et ajouté quelques tests d'exécution (3-4) pour démontré la fonctionnalité de votre programme.
+Écrivez les programmes demandés et ajoutez quelques tests d'exécution (3-4) pour démontrer la fonctionnalité de votre programme.
 
-Pour tester votre code, vous pouvez l'invoqué avec node
+Pour tester votre code, vous pouvez l'invoquer avec node.
 
 ```
 node exercice1.js
 ```
 
-Cela va exécuté votre programme
+Cela va exécuter votre programme.
 
 Un example est donné pour la première question.
 
 # Questions
 
-* Écrivez un programme JavaScript qui additionne deux nombre ensemble. 
+* Écrivez un programme JavaScript qui additionne deux nombres ensemble. 
 * Écrivez un programme JavaScript qui itère les entiers de 1 à 100. Mais pour les multiples de trois, imprimez "Fizz" au lieu du nombre et pour les multiples de cinq imprimez "Buzz". Pour les nombres qui sont des multiples de trois et cinq, imprimez "FizzBuzz".
 * Écrivez un programme JavaScript pour construire le modèle suivant, en utilisant une boucle imbriquée for.
 ```
@@ -28,7 +28,7 @@ Un example est donné pour la première question.
 * * * *  
 * * * * *
 ```
-* Écrivez un programme JavaScript pour vérifier deux nombres donnés et renvoyez true si l'un des nombres est 50 ou si leur somme est 50.
+* Écrivez un programme JavaScript pour vérifier deux nombres donnés et renvoyer true si l'un des nombres est 50 ou si leur somme est 50.
 * Écrivez une fonction JavaScript qui prendra un tableau de nombres stockés et trouvera respectivement le deuxième plus petit et le deuxième plus grand nombre.
 * Écrivez une fonction JavaScript pour obtenir le premier élément d'un tableau. Le passage d'un paramètre 'n' renverra les premiers 'n' éléments du tableau.
 
