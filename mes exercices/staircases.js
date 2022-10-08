@@ -1,4 +1,4 @@
-// three functions doing the same thing
+// 3 functions doing the same thing
 
 function staircaseIterativeConstructive(stepsCount) {
     for (i = 1; i <= stepsCount; i++) {
@@ -33,10 +33,15 @@ function staircaseRecursive(stepsCount) {
     }
 };
 
-// regular way of calling them
+/*
+    on defining multiple variables at once :
+    https://www.delftstack.com/howto/javascript/multiple-variable-assignment-in-javascript/
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+*/
 
-let stepStart = "@";
-let stepAddOn = " -#";
+let [stepStart, stepAddOn] = ["@", " -#"];
+
+// calling the 3 functions sequentially with the same argument
 
 staircaseIterativeConstructive(5);
 staircaseIterativeIncremental(5);
@@ -53,23 +58,17 @@ function callAllWith(functionList, ...args) {
     functionList.forEach(fn => fn(...args));
 };
 
-stepStart = "!";
-stepAddOn = " -\\";
-
+[stepStart, stepAddOn] = ["!", " -\\"];
 callAllWith([staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive], 5);
 
 // same as above but on the fly
 
-stepStart = "()";
-stepAddOn = " __|";
-
+[stepStart, stepAddOn] = ["()", " __|"];
 [staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive].forEach(fn => fn(5));
 
 // similar as above but with 'map' instead of 'forEach'; works due to the functions' side effects
 
-stepStart = "+";
-stepAddOn = " -";
-
+[stepStart, stepAddOn] = ["+", " -"];
 [staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive].map(fn => fn(5));
 
 // beware of the difference between 'forEach' and 'map'
@@ -86,7 +85,5 @@ function atOnce(...fns) {
     };
 };
 
-stepStart = "?";
-stepAddOn = " ! !!";
-
+[stepStart, stepAddOn] = ["?", " ! !!"];
 atOnce(staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive)(5);
