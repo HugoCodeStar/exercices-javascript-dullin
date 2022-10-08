@@ -2,23 +2,23 @@
  Série d'exercices Javascript
 
 # Instruction
-Pour chaque problème, écrivez un programme en javascript qui sera contenu dans un fichier (avec l'extension .js).
+Pour chaque problème, écrivez un programme en Javascript qui sera contenu dans un fichier (avec l'extension .js).
 
-Écrivez les programmes demandez et ajouté quelques tests d'exécution (3-4) pour démontré la fonctionnalité de votre programme.
+Écrivez les programmes demandée et ajoutez quelques tests d'exécution (3-4) pour démontrer la fonctionnalité de votre programme.
 
-Pour tester votre code, vous pouvez l'invoqué avec node
+Pour tester votre code, vous pouvez l'invoquer avec node.
 
 ```
 node exercice1.js
 ```
 
-Cela va exécuté votre programme
+Cela va exécuter votre programme.
 
 Un example est donné pour la première question.
 
 # Questions
 
-* Écrivez un programme JavaScript qui additionne deux nombre ensemble. 
+* Écrivez un programme JavaScript qui additionne deux nombres ensemble. 
 * Écrivez un programme JavaScript qui itère les entiers de 1 à 100. Mais pour les multiples de trois, imprimez "Fizz" au lieu du nombre et pour les multiples de cinq imprimez "Buzz". Pour les nombres qui sont des multiples de trois et cinq, imprimez "FizzBuzz".
 * Écrivez un programme JavaScript pour construire le modèle suivant, en utilisant une boucle imbriquée for.
 ```
