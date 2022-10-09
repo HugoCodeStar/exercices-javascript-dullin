@@ -58,7 +58,7 @@ function callAllWith(functionList, ...args) {
     functionList.forEach(fn => fn(...args));
 };
 
-[stepStart, stepAddOn] = ["!", " -\\"];
+({stepStart, stepAddOn} = { stepStart : "!", somethingElse : "your mom", stepAddOn : " -\\"});
 callAllWith([staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive], 5);
 
 // same as above but on the fly
