@@ -141,7 +141,7 @@ let flattenToDepth = function (array, depth = Infinity) {
                 else
                     newArray.push(element); // exit clause : nothing to do
             }
-            return newArray;  
+            return newArray;
         }
         else // exit clause : depth is 0
             return array;
