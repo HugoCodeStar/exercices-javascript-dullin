@@ -97,7 +97,7 @@ console.log(newValues);
 
 // first, flatten by only one level
 
-let flatten = function (array) {
+let shallowFlatten = function (array) {
     let newArray = [];
     for (let element of array) {
         if (Array.isArray(element)) newArray.push(...element); // unwrap an array
@@ -107,7 +107,7 @@ let flatten = function (array) {
 };
 
 let someArray = [1, [2, 3], [4, [5, 6]], [7, [8, [9, 10]]],[11, [12, [13, [14, 15]]]]];
-console.log(flatten(someArray)); // flatten returns a new array
+console.log(shallowFlatten(someArray)); // flatten returns a new array
 console.log(someArray); // original array is intact
 
 // next, using the previous function recursively will do a full flatten
@@ -131,13 +131,13 @@ console.log(someArray); // original array is intact
 // testing arithmetic with Infinity
 console.log(Infinity, Infinity - 1, 1 - Infinity, Infinity - Infinity, Infinity * 2, Infinity * -2, Infinity * 0);
 
-let flattenToDepth = function (array, depth = Infinity) {
+let deepFlatten = function (array, depth = Infinity) {
     if (depth >= 0) {
         if (depth > 0) {
             let newArray = [];
             for (let element of array) {
                 if (Array.isArray(element))
-                    newArray.push(...flattenToDepth(element, depth - 1)); // recursive call to one level less deep
+                    newArray.push(...deepFlatten(element, depth - 1)); // recursive call to one level less deep
                 else
                     newArray.push(element); // exit clause : nothing to do
             }
@@ -152,11 +152,11 @@ let flattenToDepth = function (array, depth = Infinity) {
     }
 };
 
-console.log("Applatissement de profondeur -1 :\n", flattenToDepth(someArray, -1), "\n");
-console.log("Applatissement de profondeur 0 :\n", flattenToDepth(someArray, 0), "\n");
-console.log("Applatissement de profondeur 1 :\n", flattenToDepth(someArray, 1), "\n");
-console.log("Applatissement de profondeur 2 :\n", flattenToDepth(someArray, 2), "\n");
-console.log("Applatissement de profondeur 3 :\n", flattenToDepth(someArray, 3), "\n");
-console.log("Applatissement de profondeur 4 :\n", flattenToDepth(someArray, 4), "\n");
-console.log("Applatissement de profondeur 5 :\n", flattenToDepth(someArray, 5), "\n");
-console.log("Applatissement de profondeur ∞ :\n", flattenToDepth(someArray), "\n");
+console.log("Applatissement de profondeur -1 :\n", deepFlatten(someArray, -1), "\n");
+console.log("Applatissement de profondeur 0 :\n", deepFlatten(someArray, 0), "\n");
+console.log("Applatissement de profondeur 1 :\n", deepFlatten(someArray, 1), "\n");
+console.log("Applatissement de profondeur 2 :\n", deepFlatten(someArray, 2), "\n");
+console.log("Applatissement de profondeur 3 :\n", deepFlatten(someArray, 3), "\n");
+console.log("Applatissement de profondeur 4 :\n", deepFlatten(someArray, 4), "\n");
+console.log("Applatissement de profondeur 5 :\n", deepFlatten(someArray, 5), "\n");
+console.log("Applatissement de profondeur ∞ :\n", deepFlatten(someArray), "\n");
