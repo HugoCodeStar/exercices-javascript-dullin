@@ -100,8 +100,8 @@ console.log(newValues);
 let flatten = function (array) {
     let newArray = [];
     for (let element of array) {
-        if (Array.isArray(element)) newArray.push(...element);
-        else newArray.push(element);
+        if (Array.isArray(element)) newArray.push(...element); // unwrap an array
+        else newArray.push(element); // leave a non-array unchanged
     }
     return newArray;    
 };
@@ -126,37 +126,37 @@ let fullFlatten = function (array) {
 console.log(fullFlatten(someArray)); // fullFlatten returns a new array
 console.log(someArray); // original array is intact
 
-// now, for the real deal where the number of levels to flatten is given, with a default value of ∞ (full flatten)
+// now, for the real deal where the flatten depth is given, with a default value of ∞ (full flatten)
 
 // testing arithmetic with Infinity
 console.log(Infinity, Infinity - 1, 1 - Infinity, Infinity - Infinity, Infinity * 2, Infinity * -2, Infinity * 0);
 
-let flattenToLevel = function (array, level = Infinity) {
-    if (level >= 0) {
-        if (level > 0) {
+let flattenToDepth = function (array, depth = Infinity) {
+    if (depth >= 0) {
+        if (depth > 0) {
             let newArray = [];
             for (let element of array) {
                 if (Array.isArray(element))
-                    newArray.push(...flattenToLevel(element, level - 1));
+                    newArray.push(...flattenToDepth(element, depth - 1)); // recursive call to one level less deep
                 else
-                    newArray.push(element);
+                    newArray.push(element); // exit clause : nothing to do
             }
             return newArray;  
         }
-        else
-            return array;  
+        else // exit clause : depth is 0
+            return array;
     }
-    else {
-        console.log("Le nombre de niveaux à aplatir doit être positif.");
+    else { // invalid depth
+        console.log("La profondeur d'aplatissement doit être un entier positif.");
         return array;
     }
 };
 
-console.log("Applatissement au niveau -1 :\n", flattenToLevel(someArray, -1), "\n");
-console.log("Applatissement au niveau 0 :\n", flattenToLevel(someArray, 0), "\n");
-console.log("Applatissement au niveau 1 :\n", flattenToLevel(someArray, 1), "\n");
-console.log("Applatissement au niveau 2 :\n", flattenToLevel(someArray, 2), "\n");
-console.log("Applatissement au niveau 3 :\n", flattenToLevel(someArray, 3), "\n");
-console.log("Applatissement au niveau 4 :\n", flattenToLevel(someArray, 4), "\n");
-console.log("Applatissement au niveau 5 :\n", flattenToLevel(someArray, 5), "\n");
-console.log("Applatissement au niveau ∞ :\n", flattenToLevel(someArray), "\n");
+console.log("Applatissement de profondeur -1 :\n", flattenToDepth(someArray, -1), "\n");
+console.log("Applatissement de profondeur 0 :\n", flattenToDepth(someArray, 0), "\n");
+console.log("Applatissement de profondeur 1 :\n", flattenToDepth(someArray, 1), "\n");
+console.log("Applatissement de profondeur 2 :\n", flattenToDepth(someArray, 2), "\n");
+console.log("Applatissement de profondeur 3 :\n", flattenToDepth(someArray, 3), "\n");
+console.log("Applatissement de profondeur 4 :\n", flattenToDepth(someArray, 4), "\n");
+console.log("Applatissement de profondeur 5 :\n", flattenToDepth(someArray, 5), "\n");
+console.log("Applatissement de profondeur ∞ :\n", flattenToDepth(someArray), "\n");
