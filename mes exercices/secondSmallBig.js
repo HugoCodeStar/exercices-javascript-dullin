@@ -64,7 +64,7 @@ console.log(numbers);
 
 function secondSmallestAndBiggest_5(numbersArray) {
     // let's use recursion for a deep copy
-    const clone = items => items.map(item => Array.isArray(item) ? clone(item) : item);
+    const clone = items => items.map(item => Array.isArray(item) ? clone(item) : item); // very fucking nice!!!
 
     newArray = clone(numbersArray); // doing a deep copy with the recursive function defined above
     newArray.sort((a, b) => a - b);
@@ -74,4 +74,26 @@ function secondSmallestAndBiggest_5(numbersArray) {
 numbers = [65, -6, 0, 55, 11, 1, -4, 7, 88, 2, 63, 101, -7, 9];
 secondSmallestAndBiggest_5(numbers);
 // we can't verify it here but it works even with nested arrays too!
+console.log(numbers);
+
+
+
+// again ... slightly better with exception handling
+
+function secondSmallestAndBiggest(numbersArray) {
+    if (numbersArray.length > 1) {
+        const clone = items => items.map(item => Array.isArray(item) ? clone(item) : item);
+        newArray = clone(numbersArray);
+        newArray.sort((a, b) => a - b);
+        console.log(`2e plus petit nombre : ${newArray[1]}; 2e plus grand nombre : ${newArray[newArray.length - 2]}`);
+    }
+    else
+        console.log("Le tableau doit contenir au moins 2 nombres.");
+};
+
+numbers = [65];
+secondSmallestAndBiggest(numbers);
+
+numbers = [65, -6, 0, 55, 11, 1, -4, 7, 88, 2, 63, 101, -7, 9];
+secondSmallestAndBiggest(numbers);
 console.log(numbers);
