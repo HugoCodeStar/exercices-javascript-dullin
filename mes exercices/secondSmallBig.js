@@ -18,7 +18,7 @@ console.log(numbers);
 */
 
 function secondSmallestAndBiggest_2(numbersArray) {
-    newArray = numbersArray; // trying to copy the array to a new array and modify the new array; this copies the pointer only
+    newArray = numbersArray; // doing a fake copy; this copies the pointer only
     newArray.sort((a, b) => a - b);
     console.log(`2e plus petit nombre : ${newArray[1]}; 2e plus grand nombre : ${newArray[newArray.length - 2]}`);
 };
@@ -56,4 +56,22 @@ function secondSmallestAndBiggest_4(numbersArray) {
 numbers = [65, -6, 0, 55, 11, 1, -4, 7, 88, 2, 63, 101, -7, 9];
 secondSmallestAndBiggest_4(numbers);
 // we can't verify it here but it works even with nested arrays!
+console.log(numbers);
+
+
+
+// again ... since the JSON functions (stringify, parse) are good for all things compatible with JSON; this may not always be the case
+
+function secondSmallestAndBiggest_5(numbersArray) {
+    // let's use recursion for a deep copy
+    const clone = items => items.map(item => Array.isArray(item) ? clone(item) : item);
+
+    newArray = clone(numbersArray); // doing a deep copy with the recursive function defined above
+    newArray.sort((a, b) => a - b);
+    console.log(`2e plus petit nombre : ${newArray[1]}; 2e plus grand nombre : ${newArray[newArray.length - 2]}`);
+};
+
+numbers = [65, -6, 0, 55, 11, 1, -4, 7, 88, 2, 63, 101, -7, 9];
+secondSmallestAndBiggest_5(numbers);
+// we can't verify it here but it works even with nested arrays too!
 console.log(numbers);
