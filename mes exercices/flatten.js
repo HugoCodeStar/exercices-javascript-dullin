@@ -100,14 +100,16 @@ console.log(newValues);
 let shallowFlatten = function (array) {
     let newArray = [];
     for (let element of array) {
-        if (Array.isArray(element)) newArray.push(...element); // unwrap an array
-        else newArray.push(element); // leave a non-array unchanged
+        if (Array.isArray(element))
+            newArray.push(...element); // unwrap an array
+        else
+            newArray.push(element); // leave a non-array unchanged
     }
     return newArray;    
 };
 
 let someArray = [1, [2, 3], [4, [5, 6]], [7, [8, [9, 10]]],[11, [12, [13, [14, 15]]]]];
-console.log(shallowFlatten(someArray)); // flatten returns a new array
+console.log(shallowFlatten(someArray)); // shallowFlatten returns a new array
 console.log(someArray); // original array is intact
 
 // next, using the previous function recursively will do a full flatten
@@ -129,7 +131,12 @@ console.log(someArray); // original array is intact
 // now, for the real deal where the flatten depth is given, with a default value of ∞ (full flatten)
 
 // testing arithmetic with Infinity
-console.log(Infinity, Infinity - 1, 1 - Infinity, Infinity - Infinity, Infinity * 2, Infinity * -2, Infinity * 0);
+console.log(
+    Infinity - 1, 1 - Infinity, Infinity - Infinity,
+    Infinity * 2, Infinity * -2, Infinity * 0,
+    Infinity * Infinity, Infinity / Infinity,
+    Infinity ** Infinity, Infinity ** 0, 0 ** Infinity, 0 ** 0, 1 ** Infinity
+);
 
 let deepFlatten = function (array, depth = Infinity) {
     if (depth >= 0) {

@@ -39,13 +39,20 @@ function staircaseRecursive(stepsCount) {
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 */
 
-let [stepStart, stepAddOn] = ["@", " -#"];
-
 // calling the 3 functions sequentially with the same argument
+
+let [stepStart, stepAddOn] = ["*", "*"];
 
 staircaseIterativeConstructive(5);
 staircaseIterativeIncremental(5);
 staircaseRecursive(5);
+
+// the functions can also be called iteratively
+
+[stepStart, stepAddOn] = ["@", " -#"];
+
+for (let staircaseFn of [staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive])
+    staircaseFn(5);
 
 /*
     but there's gotta be a better way to do this, no?
@@ -87,3 +94,15 @@ function atOnce(...fns) {
 
 [stepStart, stepAddOn] = ["?", " ! !!"];
 atOnce(staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive)(5);
+
+// remarks on defining a function; all the following do the same
+
+function someFunction1 (a, b) { return a + b; };
+// let someFunction1 = 4; // code editor doesn't 'see' the error; leaving this line will crash the program
+let someFunction2 = function (a, b) { return a + b; };
+// let someFunction2 = 4; // while, here, it does; so, is it better to use 'let' all the time ?
+let someFunction3 = (a, b) => { return a + b; };
+let someFunction4 = (a, b) => a + b;
+[someFunction1, someFunction2, someFunction3, someFunction4].forEach(
+        fn => console.log(`Winston, what is '2 + 2' ?  Sir, '2 + 2' equals ... equals ... ${fn(2, 3)}.`)
+    );
