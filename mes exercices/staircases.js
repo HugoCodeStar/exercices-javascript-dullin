@@ -41,16 +41,14 @@ function staircaseRecursive(stepsCount) {
 
 // calling the 3 functions sequentially with the same argument
 
-let [stepStart, stepAddOn] = ["*", "*"];
-
+let [stepStart, stepAddOn] = ["*", "*"]; // one way of assigning multiple values at once
 staircaseIterativeConstructive(5);
 staircaseIterativeIncremental(5);
 staircaseRecursive(5);
 
 // the functions can also be called iteratively
 
-[stepStart, stepAddOn] = ["@", " -#"];
-
+({stepStart, stepAddOn} = { stepStart : "@", somethingElse : "your mom", stepAddOn : " -#"}); // another way ...
 for (let staircaseFn of [staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive])
     staircaseFn(5);
 
@@ -65,7 +63,7 @@ function callAllWith(functionList, ...args) {
     functionList.forEach(fn => fn(...args));
 };
 
-({stepStart, stepAddOn} = { stepStart : "!", somethingElse : "your mom", stepAddOn : " -\\"});
+[stepStart, stepAddOn] = ["!", " -\\"];
 callAllWith([staircaseIterativeConstructive, staircaseIterativeIncremental, staircaseRecursive], 5);
 
 // same as above but on the fly
