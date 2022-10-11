@@ -139,6 +139,10 @@ console.log(
 );
 
 let deepFlatten = function (array, depth = Infinity) {
+    // recursive function to do a deep copy of an array
+    const clone = items => items.map(item => Array.isArray(item) ? clone(item) : item);
+
+    // the flattenning ...
     if (depth >= 0) {
         if (depth > 0) {
             let newArray = [];
@@ -151,11 +155,11 @@ let deepFlatten = function (array, depth = Infinity) {
             return newArray;
         }
         else // exit clause : depth is 0
-            return array;
+            return clone(array); // since deepFlatten returns a new array
     }
     else { // invalid depth
         console.log("La profondeur d'aplatissement doit être un entier positif.");
-        return array;
+        return clone(array); // since deepFlatten returns a new array
     }
 };
 
@@ -167,3 +171,52 @@ console.log("Applatissement de profondeur 3 :\n", deepFlatten(someArray, 3), "\n
 console.log("Applatissement de profondeur 4 :\n", deepFlatten(someArray, 4), "\n");
 console.log("Applatissement de profondeur 5 :\n", deepFlatten(someArray, 5), "\n");
 console.log("Applatissement de profondeur ∞ :\n", deepFlatten(someArray), "\n");
+
+
+
+
+
+// let's now make this function available to all arrays as a method
+
+Object.defineProperty(Array.prototype, 'flatten', {
+    value: function (depth = Infinity) {
+
+    // recursive function to flatten the array; returns a new array
+    const flattenFn = (theArray, theDepth = Infinity) => {
+        // recursive function to do a deep copy of an array
+        const clone = items => items.map(item => Array.isArray(item) ? clone(item) : item);
+            
+        // the flattenning ...
+        if (theDepth >= 0) {
+            if (theDepth > 0) {
+                let newArray = [];
+                for (let element of theArray) {
+                    if (Array.isArray(element))
+                        newArray.push(...deepFlatten(element, theDepth - 1)); // recursive call to one level less deep
+                    else
+                        newArray.push(element); // exit clause : nothing to do
+                }
+                return newArray;
+            }
+            else // exit clause : depth is 0
+                return clone(theArray); // since flattenFn returns a new array
+        }
+        else { // invalid depth
+            console.log("La profondeur d'aplatissement doit être un entier positif.");
+            return clone(theArray); // since flattenFn returns a new array
+        }
+    };
+
+    // .flatten modifies the calling object
+    this.splice(0, this.length, ...flattenFn(this, depth));
+
+    // .flatten returns the length of the flattened array
+    return this.length;
+
+}
+});
+
+console.log(someArray); // original array
+console.log(someArray.flatten(2)); // .flatten returns the flattened array's length
+console.log(someArray); // original array has been modified
+//console.log(someArray.flatten.toString()); // to see the code of a function
