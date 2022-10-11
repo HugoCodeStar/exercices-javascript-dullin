@@ -104,3 +104,4 @@ let someFunction4 = (a, b) => a + b;
 [someFunction1, someFunction2, someFunction3, someFunction4].forEach(
         fn => console.log(`Winston, what is '2 + 2' ?  Sir, '2 + 2' equals ... equals ... ${fn(2, 3)}.`)
     );
+    
