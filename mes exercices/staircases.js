@@ -25,8 +25,10 @@ function staircaseRecursive(stepsCount) {
     if (stepsCount > 0) {
         let theStep;
 
-        if (stepsCount === 1) theStep = stepStart;
-        else theStep = staircaseRecursive(stepsCount - 1) + stepAddOn;
+        if (stepsCount == 1)
+            theStep = stepStart;
+        else
+            theStep = staircaseRecursive(stepsCount - 1) + stepAddOn;
     
         console.log(theStep);
         return theStep;
@@ -41,7 +43,7 @@ function staircaseRecursive(stepsCount) {
 
 // calling the 3 functions sequentially with the same argument
 
-let [stepStart, stepAddOn] = ["*", "*"]; // one way of assigning multiple values at once
+let [stepStart, stepAddOn] = ["*", "*"]; // one way of assigning multiple values at once ...
 staircaseIterativeConstructive(5);
 staircaseIterativeIncremental(5);
 staircaseRecursive(5);
@@ -53,7 +55,7 @@ for (let staircaseFn of [staircaseIterativeConstructive, staircaseIterativeIncre
     staircaseFn(5);
 
 /*
-    but there's gotta be a better way to do this, no?
+    but there's gotta be a fancier way to do this, no?
     https://stackoverflow.com/questions/57963070/is-it-possible-to-call-two-functions-at-the-same-time-with-one-set-of-arguments
 */
 
@@ -85,8 +87,8 @@ console.log( ["dog", "cat", "hen"].forEach(name => `baby ${name}`) ); // does so
 
 function atOnce(...fns) {
     return function(...args) {
-         for (const fn of fns)
-             fn.apply(this, args);
+        for (const fn of fns)
+            fn.apply(this, args); // fn(...args); also works ... any difference? 'this' specifies the context
     };
 };
 

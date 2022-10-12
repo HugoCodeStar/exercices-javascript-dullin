@@ -182,7 +182,7 @@ Object.defineProperty(Array.prototype, 'flatten', {
     value: function (depth = Infinity) {
 
     // recursive function to flatten the array; returns a new array
-    const flattenFn = (theArray, theDepth = Infinity) => {
+    const flattenFn = (theArray, theDepth) => {
         // recursive function to do a deep copy of an array
         const clone = items => items.map(item => Array.isArray(item) ? clone(item) : item);
             
