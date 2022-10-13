@@ -176,7 +176,7 @@ console.log("Applatissement de profondeur ∞ :\n", deepFlatten(someArray), "\n"
 
 
 
-// let's now make this function available to all arrays as a method
+// let's now make this function available to all arrays as a 'method' (property, in fact ... which will be a function)
 
 Object.defineProperty(Array.prototype, 'flatten', {
     value: function (depth = Infinity) {
