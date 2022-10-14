@@ -139,6 +139,33 @@ Rational.prototype.divide = function(number) {
         return this.multiply(number);
 };
 
+// integer power
+Rational.prototype.power = function(number) {
+    const setToNan = () => { [this.num, this.denom] = [0, 0]; };
+    const setToInf = () => { [this.num, this.denom] = [1, 0]; };
+    const setToZero = () => { [this.num, this.denom] = [0, 1]; };
+
+    const integerPower = function(integer) { return (integer == 0 ? new Rational(1) : integerPower(integer - 1).multiply(new Rational(this.num, this.denom))) };
+
+    if (!isNaN(this.valueOf())) {
+        if (Math.abs(this) == Infinity) {
+
+        }
+    }
+
+    return integerPower(number);
+    /*
+    if (Number.isInteger(number))
+        if (number > 0)
+            return integerPower(number);
+        else if (number < 0)
+            return integerPower(-number).inverse();
+        else
+            if (this.valueOf() == Infinity)
+                setToNan();
+    */
+};
+
 
 
 
@@ -158,15 +185,16 @@ console.log();
         rat,
         rat.toString(), // returns [object Object] if toString() isn't overridden
         `${rat}`, // coerces toString() call
-        " -- ",
+        rat + "", // coerces valueOf() call with further conversion to string
+        " - ",
         typeof rat,
         Object.prototype.toString.call(rat),
-        rat instanceof Rational,
-        " -- ",
+        " - ",
         rat.valueOf(), // returns the object if valueOf() isn't overridden
         // the following coerce valueOf() call
         1 + rat, // if valueOf() doesn't return a number, + will also coerce toString() call
         1 - rat, // if valueOf() doesn't return a number, NaN will be returned with the other mathematical operators
+        -rat,
         3 * rat,
         1 / rat,
         2 ** rat,
@@ -205,10 +233,12 @@ console.log();
 
 
 
-let phiApprox = depth => depth == 0 ? new Rational(1) : phiApprox(depth - 1).inverse().add(1);
+let phiApprox = depth => depth == 0 ? new Rational(1) /* any seed will do here */ : phiApprox(depth - 1).inverse().add(1);
 for (depth = 0; depth <= 20; depth++)
     console.log(depth.toString().padStart(2, ' '), " - ", phiApprox(depth).valueOf());
 console.log();
 
 [38, 39].forEach(depth => (phi => console.log(depth, `${phi}`, phi + 0, phi**2 - phi - 1))(phiApprox(depth)));
 console.log();
+
+console.log(new Rational(2, 3).power(3));
