@@ -36,7 +36,6 @@ Rational.prototype.valueOf = function() { return this.num / this.denom };
 
 // toString() override
 Rational.prototype.toString = function() { return `(${this.num} / ${this.denom})`; };   // output : (num / denom)
-//Rational.prototype.toString = () => { return `(${this.num} / ${this.denom})`; };      // output : (undefined / undefined)     why?
 
 // simplification
 Rational.prototype.simplify = function() {
@@ -145,25 +144,7 @@ Rational.prototype.power = function(number) {
     const setToInf = () => { [this.num, this.denom] = [1, 0]; };
     const setToZero = () => { [this.num, this.denom] = [0, 1]; };
 
-    const integerPower = function(integer) { return (integer == 0 ? new Rational(1) : integerPower(integer - 1).multiply(new Rational(this.num, this.denom))) };
-
-    if (!isNaN(this.valueOf())) {
-        if (Math.abs(this) == Infinity) {
-
-        }
-    }
-
-    return integerPower(number);
-    /*
-    if (Number.isInteger(number))
-        if (number > 0)
-            return integerPower(number);
-        else if (number < 0)
-            return integerPower(-number).inverse();
-        else
-            if (this.valueOf() == Infinity)
-                setToNan();
-    */
+    return this;
 };
 
 
@@ -205,6 +186,7 @@ console.log();
     )
 );
 console.log();
+
 
 
 
