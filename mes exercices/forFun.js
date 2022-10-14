@@ -110,7 +110,7 @@ Rational.prototype.multiply = function(number) {
         this.denom = this.denom * number.denom;
     }
     else if (Number.isInteger(number) || Math.abs(number) == Infinity)
-        // addition of a rational by an integer or ±∞
+        // multiplication of a rational by an integer or ±∞
         this.num = this.num * number;
     else if (number != undefined)
         // invalid argument produces NaN
@@ -121,8 +121,11 @@ Rational.prototype.multiply = function(number) {
 
 // inverse
 Rational.prototype.inverse = function() {
-    // numerator and denominator swap for the inverse
-    [this.num, this.denom] = [this.denom, this.num];
+    if (this.valueOf() == 0)
+        [this.num, this.denom] = [0, 0];
+    else
+        // numerator and denominator swap for the inverse
+        [this.num, this.denom] = [this.denom, this.num];
     return this.simplify(); // just in case the denominator is now negative
 };
 
@@ -144,7 +147,41 @@ Rational.prototype.power = function(number) {
     const setToInf = () => { [this.num, this.denom] = [1, 0]; };
     const setToZero = () => { [this.num, this.denom] = [0, 1]; };
 
-    return this;
+    if (Number.isInteger(number)) {
+        if (number >= 0)
+            // exponentiation of a rational by an positive integer
+            [this.num, this.denom] = [this.num, this.denom].map(elem => elem ** number);
+        else
+            // exponentiation of a rational by a strictly negative integer
+            [this.num, this.denom] = [this.denom, this.num].map(elem => elem ** -number);
+    }
+    else if (number == Infinity) {
+        // exponentiation of a rational by ∞
+        if (this <= -1)                     // (-∞, -1]
+            setToNan();
+        else if (this > 1)                  // (1, ∞)
+            setToInf();
+        else if (this < 1)                  // (-1, 1)
+            setToZero();
+        else                                // {1}
+            setToNan();
+    }
+    else if (number == -Infinity) {
+        // exponentiation of a rational by -∞
+        if (this < -1 || this > 1)          // (-∞, -1) union (1, ∞)
+            setToZero();
+        else if (this >= -1 && this <= 0)   // [-1, 0]
+            setToNan();
+        else if (this < 1)                  // (0, 1)
+            setToInf();
+        else                                // {1}
+            setToNan();
+    }
+    else if (number != undefined)
+        // invalid argument produces NaN
+        setToNan();
+    // else : exponentiation by 1 (nothing changes) if no argument is provided
+    return this.simplify() // in case denominator is now negative
 };
 
 
@@ -197,12 +234,42 @@ console.log();
     new Rational(2).multiply(-Infinity),                        // and also with ±Infinity
     new Rational(2).multiply("allo"),                           // invalid argument will set to NaN
     new Rational(2).multiply(),                                 // no argument multiplies by 1
-
+    "",
     new Rational(1).divide(3).subtract(new Rational(-1, 4)),    // kinda testing all the rest at once coz I'm lazy!
     new Rational(7).subtract(Infinity),
     new Rational(7).divide(Infinity).inverse().add(new Rational(5, 13)),
     new Rational(Infinity).divide(Infinity),
-    new Rational().divide(new Rational().inverse().inverse())   // OK! it all seems good!!
+    new Rational().inverse(),
+    new Rational(Infinity).inverse(),
+    new Rational(-Infinity).inverse(),
+    "",
+    new Rational(-Infinity).power(Infinity),
+    new Rational(-3, 2).power(Infinity),
+    new Rational(-1).power(Infinity),
+    new Rational(-2, 3).power(Infinity),
+    new Rational(0).power(Infinity),
+    new Rational(2, 3).power(Infinity),
+    new Rational(1).power(Infinity),
+    new Rational(3, 2).power(Infinity),
+    new Rational(Infinity).power(Infinity),
+    "",
+    new Rational(-Infinity).power(-Infinity),
+    new Rational(-3, 2).power(-Infinity),
+    new Rational(-1).power(-Infinity),
+    new Rational(-2, 3).power(-Infinity),
+    new Rational(0).power(-Infinity),
+    new Rational(2, 3).power(-Infinity),
+    new Rational(1).power(-Infinity),
+    new Rational(3, 2).power(-Infinity),
+    new Rational(Infinity).power(-Infinity),
+    "",
+    new Rational(-3, 2).power(-3),
+    new Rational(-3, 2).power(-2),
+    new Rational(-3, 2).power(-1),
+    new Rational(-3, 2).power(0),
+    new Rational(-3, 2).power(),
+    new Rational(-3, 2).power(2),
+    new Rational(-3, 2).power(3)
 ].forEach(
     rat => console.log(
         `${rat}`,
@@ -215,7 +282,7 @@ console.log();
 
 
 
-let phiApprox = depth => depth == 0 ? new Rational(1) /* any seed will do here */ : phiApprox(depth - 1).inverse().add(1);
+let phiApprox = depth => depth == 0 ? new Rational(1) /* almost any seed will do here */ : phiApprox(depth - 1).inverse().add(1);
 for (depth = 0; depth <= 20; depth++)
     console.log(depth.toString().padStart(2, ' '), " - ", phiApprox(depth).valueOf());
 console.log();
@@ -223,4 +290,17 @@ console.log();
 [38, 39].forEach(depth => (phi => console.log(depth, `${phi}`, phi + 0, phi**2 - phi - 1))(phiApprox(depth)));
 console.log();
 
-console.log(new Rational(2, 3).power(3));
+
+
+
+
+
+
+
+
+
+function LinearFactory(coeff0, coeff1) {
+    return x => coeff0 + coeff1 * x 
+};
+
+console.log(LinearFactory(2, 3)(5));
